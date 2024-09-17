@@ -41,4 +41,15 @@ function placeOrder(customerName, orderedItems) {
     return true;
 }
 
+//Create a Function to Calculate Total for an Order
+function calculateOrderTotal (order){
+    return order.items.reduce((total, item) => {
+        const product = inventory.find (p=> p.name === item.name);
+        if (product) {
+            return total + (+product.price * item.quantity);
+        }
+        return total;
+    },0);
+    }
+
 
