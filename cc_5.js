@@ -17,3 +17,28 @@ const orders= [
     status: "Pending"
 }
 ];
+
+//Create a Function to Place an Order
+function placeOrder(customerName, orderedItems) {
+    for (const item of orderedItems) {
+        const product = inventory.find(p=> p.name===item.productname);
+        if (!product || product.stock < item.quantity) {
+            console.error('Not suffice stock. Order cannot be placed');
+        return false;
+        }
+        }
+        orderedItems.forEach (item => {
+            const product = inventory.find(p=> p.name === item.productname);
+        product.stock -= item.quantity;
+        });
+        const newOrder= {
+            customerName: customerName,
+            items: orderedItems,
+            status: 'Pending'
+        };
+    orders.push(newOrder);
+    console.log ('Order successfully placed');
+    return true;
+}
+
+
