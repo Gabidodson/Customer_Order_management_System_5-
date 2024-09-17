@@ -5,3 +5,15 @@ const inventory = [
     {name:'Tea', price:'6.99', quantity:'60' },
     {name:'Mug', price:'15.99', quantity:'25' }
 ];
+
+//Create an Orders Array of Order Objects
+const orders= [
+    {
+    customerName: "Patrick Star",
+    items: [
+        {name: "Latte", quantity:3},
+        {name: "Pastry", quantity:4}
+    ],
+    status: "Pending"
+}
+];
