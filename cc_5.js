@@ -21,9 +21,9 @@ const orders= [
 //Create a Function to Place an Order
 function placeOrder(customerName, orderedItems) {
     for (const item of orderedItems) {
-        const product = inventory.find(p=> p.name===item.productname);
-        if (!product || product.stock < item.quantity) {
-            console.error('Insuffcient stock. Order cannot be placed');
+        const product = inventory.find(p=> p.name===item.name);
+        if (!product || product.quantity < item.quantity) {
+            console.error('Insufficient stock. Order cannot be placed');
         return false;
         }
         }
@@ -32,7 +32,7 @@ function placeOrder(customerName, orderedItems) {
         product.quantity -= item.quantity;
         });
         const newOrder= {
-            customerName: customerName,
+            customerName,
             items: orderedItems,
             status: 'Pending'
         };
@@ -62,4 +62,20 @@ function completeOrder (customerName){
     orders[orderIndex].status= 'Completed';
     console.log(`Order for ${customerName} is completed`);
     return true;
+}
+
+//Create a Function to Check Pending Orders
+function checkPendingOrders () {
+    const pendingOrders = orders.filter(order=> order.status === 'Pending');
+if (pendingOrders.length===0) {
+    console.log ('No pending orders');
+    return;
+}
+console.log('Pending Orders:');
+pendingOrders.forEach(order =>{
+    const total = calculateOrderTotal (order);
+    const itemSummary = order.items.map(item=> `${item.quantity} ${item.name}`).join(',');
+    console.log(`${order.customerName}:${itemSummary}- Total: $${total.toFixed(2)}`);
+
+});
 }
