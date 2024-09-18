@@ -1,9 +1,9 @@
 //Create an Inventory Array of Product Objects
 const inventory = [
-    {name:'Latte', price:'7.99', quantity:'80' },
-    {name:'Pastry', price:'5.99', quantity:'50' },
-    {name:'Tea', price:'6.99', quantity:'60' },
-    {name:'Mug', price:'15.99', quantity:'25' }
+    {name:'Latte', price:7.99, quantity:80 },
+    {name:'Pastry', price:5.99, quantity:50 },
+    {name:'Tea', price:6.99, quantity:60 },
+    {name:'Mug', price:15.99, quantity:25 }
 ];
 
 //Create an Orders Array of Order Objects
@@ -23,13 +23,13 @@ function placeOrder(customerName, orderedItems) {
     for (const item of orderedItems) {
         const product = inventory.find(p=> p.name===item.productname);
         if (!product || product.stock < item.quantity) {
-            console.error('Not suffice stock. Order cannot be placed');
+            console.error('Insuffcient stock. Order cannot be placed');
         return false;
         }
         }
         orderedItems.forEach (item => {
-            const product = inventory.find(p=> p.name === item.productname);
-        product.stock -= item.quantity;
+            const product = inventory.find(p=> p.name === item.name);
+        product.quantity -= item.quantity;
         });
         const newOrder= {
             customerName: customerName,
@@ -46,10 +46,20 @@ function calculateOrderTotal (order){
     return order.items.reduce((total, item) => {
         const product = inventory.find (p=> p.name === item.name);
         if (product) {
-            return total + (+product.price * item.quantity);
+            return total + (product.price * item.quantity);
         }
         return total;
     },0);
     }
 
-
+//Create a Function to Mark an Order as Completed
+function completeOrder (customerName){
+    const orderIndex =orders.findIndex(order => order.customerName === customerName);
+    if (orderIndex === -1) {
+        console.error ('No order found');
+        return false;
+    }
+    orders[orderIndex].status= 'Completed';
+    console.log(`Order for ${customerName} is completed`);
+    return true;
+}
