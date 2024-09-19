@@ -40,6 +40,13 @@ function placeOrder(customerName, orderedItems) {
     console.log ('Order successfully placed');
     return true;
 }
+//Testing function to place order
+console.log("Test 1: Placing order");
+const result1= placeOrder("Sandy", [
+    {name:"Latte", quanity:2},
+    {name:"Pastry", quanity:3}
+]);
+//Return 'order placed sucesfully'
 
 //Create a Function to Calculate Total for an Order
 function calculateOrderTotal (order){
@@ -54,7 +61,7 @@ function calculateOrderTotal (order){
 
 //Create a Function to Mark an Order as Completed
 function completeOrder (customerName){
-    const orderIndex =orders.findIndex(order => order.customerName === customerName);
+    const orderIndex = orders.findIndex(order => order.customerName === customerName);
     if (orderIndex === -1) {
         console.error ('No order found');
         return false;
@@ -63,6 +70,11 @@ function completeOrder (customerName){
     console.log(`Order for ${customerName} is completed`);
     return true;
 }
+//Test data for order completion
+console.log ("Test 1: Complete order");
+console.log(completeOrder("Sandy"));
+console.log(orders[0].status);
+//Sandy's order completed
 
 //Create a Function to Check Pending Orders
 function checkPendingOrders () {
@@ -79,3 +91,4 @@ pendingOrders.forEach(order =>{
 
 });
 }
+ //Test data for pending orders-shows pending 
